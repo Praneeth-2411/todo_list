@@ -23,7 +23,7 @@ db.connect((err) => {
   }
 });
 
-// Fetch all tasks
+
 app.get('/tasks', (req, res) => {
   db.query('SELECT * FROM tasks', (err, results) => {
     if (err) {
@@ -34,7 +34,7 @@ app.get('/tasks', (req, res) => {
   });
 });
 
-// Add a new task
+
 app.post('/tasks', (req, res) => {
   const { task_name, due_date, category, completed = false } = req.body;
   db.query(
@@ -50,14 +50,14 @@ app.post('/tasks', (req, res) => {
   );
 });
 
-// Delete a task and reset the AUTO_INCREMENT
+
 app.delete('/tasks/:id', (req, res) => {
   const taskId = req.params.id;
   db.query('DELETE FROM tasks WHERE id = ?', [taskId], (err, result) => {
     if (err) {
       res.status(500).send('Error deleting task');
     } else {
-      // Reset the AUTO_INCREMENT after deletion
+      
       db.query('ALTER TABLE tasks AUTO_INCREMENT = 1', (err) => {
         if (err) {
           console.error('Error resetting auto increment:', err);
@@ -71,7 +71,7 @@ app.delete('/tasks/:id', (req, res) => {
 });
 app.put('/tasks/:id', (req, res) => {
   const taskID = req.params.id;
-  const { completed } = req.body; // Assuming you're sending the updated status
+  const { completed } = req.body;
 
   db.query(
     'UPDATE tasks SET completed = ? WHERE id = ?',
@@ -89,6 +89,6 @@ app.put('/tasks/:id', (req, res) => {
 
 
 
-app.listen(5167, () => {
-  console.log('Backend is running on port 5167');
+app.listen(5123, () => {
+  console.log('Backend is running on port 5123');
 });

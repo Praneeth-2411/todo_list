@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AddTask = () => {
+const AddTask = ({ setTasks }) => {
   const [taskName, setTaskName] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [category, setCategory] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const task = { task_name: taskName, due_date: dueDate, category };
+    const task = { task_name: taskName, due_date: dueDate, category, completed: false };
 
     try {
-      await axios.post('http://localhost:5167/tasks', task);
+      const res = await axios.post('http://localhost:5123/tasks', task);
+      if (res.status === 201) {
+        setTasks(prevTasks => [...prevTasks, { id: res.data.id, ...task }]);
+      }
       alert('Task added');
       setTaskName('');
       setDueDate('');
@@ -53,4 +56,3 @@ const AddTask = () => {
 };
 
 export default AddTask;
-
