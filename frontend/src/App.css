@@ -30,7 +30,7 @@ input[type="text"], input[type="date"] {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #904988;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -41,14 +41,15 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #bc70b9;
 }
 
 
 table {
   width: 100%;
   max-width: 800px;
-  margin-top: 20px;
+  margin-bottom: 60px;
+  margin-top: 22px;
   border-collapse: collapse;
 }
 
@@ -59,7 +60,7 @@ th, td {
 }
 
 th {
-  background-color: #007BFF;
+  background-color: #00d0ff;
   color: white;
   font-size: 18px;
 }
@@ -74,7 +75,7 @@ tr:nth-child(even) td {
 }
 
 button.delete {
-  background-color: #ff4d4d;
+  background-color: #f07a53;
   color: white;
   padding: 5px 10px;
   border: none;
@@ -83,11 +84,12 @@ button.delete {
 }
 
 button.delete:hover {
-  background-color: #ff0000;
+  background-color: #cf7d7d;
 }
 
-h2 {
-  margin-top: 0;
+.task-list h2 {
+  margin-top: 30px;
   font-size: 24px;
+  margin-bottom: 10px;
   color: #333;
 }

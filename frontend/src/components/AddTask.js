@@ -11,7 +11,7 @@ const AddTask = () => {
     const task = { task_name: taskName, due_date: dueDate, category };
 
     try {
-      await axios.post('http://localhost:5123/tasks', task);
+      await axios.post('http://localhost:5167/tasks', task);
       alert('Task added');
       setTaskName('');
       setDueDate('');

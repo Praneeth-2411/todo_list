@@ -4,7 +4,8 @@ const cors = require('cors');
 const mysql = require('mysql2');
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: "http://localhost:3000", methods: "GET,PUT,POST,DELETE" }));
+
 app.use(express.json());
 
 const db = mysql.createConnection({
@@ -35,10 +36,10 @@ app.get('/tasks', (req, res) => {
 
 // Add a new task
 app.post('/tasks', (req, res) => {
-  const { task_name, due_date, category } = req.body;
+  const { task_name, due_date, category, completed = false } = req.body;
   db.query(
-    'INSERT INTO tasks (task_name, due_date, category) VALUES (?, ?, ?)',
-    [task_name, due_date, category],
+    'INSERT INTO tasks (task_name, due_date, category, completed) VALUES (?, ?, ?, ?)',
+    [task_name, due_date, category, completed],
     (err, result) => {
       if (err) {
         res.status(500).send('Error adding task');
@@ -68,7 +69,26 @@ app.delete('/tasks/:id', (req, res) => {
     }
   });
 });
+app.put('/tasks/:id', (req, res) => {
+  const taskID = req.params.id;
+  const { completed } = req.body; // Assuming you're sending the updated status
 
-app.listen(5123, () => {
-  console.log('Backend is running on port 5123');
+  db.query(
+    'UPDATE tasks SET completed = ? WHERE id = ?',
+    [completed, taskID],
+    (err, result) => {
+      if (err) {
+        console.error('Error updating task:', err);
+        res.status(500).send('Error updating task');
+      } else {
+        res.status(200).send('Task updated successfully');
+      }
+    }
+  );
+});
+
+
+
+app.listen(5167, () => {
+  console.log('Backend is running on port 5167');
 });
