@@ -1,0 +1,91 @@
+/* Task List Page */
+.task-list {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto; /* Centered with margin */
+  font-family: Arial, sans-serif;
+  text-align: center; /* Center the content */
+}
+
+.task-list-heading1 {
+  margin-top: 30px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: rgb(228, 92, 13)
+}
+
+.task-list-heading2 {
+  margin-top: 30px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: rgb(49, 204, 93)
+}
+
+.task-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 60px auto; /* Centered and space at the bottom */
+  margin-top: 22px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #00d0ff;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+}
+
+td {
+  background-color: #ffffff;
+  font-size: 16px;
+}
+
+tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.pending-task {
+  background-color: #ffebcc;
+  transition: all 0.2s ease-in-out;
+}
+
+.pending-task:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.completed-task {
+  background-color: #d4edda;
+  transition: all 0.2s ease-in-out;
+}
+
+.completed-task:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+button.delete {
+  background-color: #ff0000;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+button.delete:hover {
+  background-color: #cc0000;
+  transform: scale(1.05);
+}

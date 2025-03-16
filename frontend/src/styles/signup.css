@@ -1,0 +1,67 @@
+/* Signup Page */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('/public/BG.png');  /* Background image added */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  position: absolute; /* Ensure full-screen coverage */
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.signup-form {
+  background-color: rgba(255, 255, 255, 0.9);  /* Slight transparency */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;  /* Ensure text inside is centered */
+  margin: 0 auto; /* This will horizontally center the form */
+}
+
+.signup-form h2 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.signup-form input {
+  width: 95%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #943780;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.signup-form input:hover {
+  border-color: #ffffff;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.signup-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #c55ba1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.signup-form button:hover {
+  background-color: #84397e;
+  transform: scale(1.05);
+}
