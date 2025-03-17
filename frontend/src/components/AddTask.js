@@ -51,7 +51,7 @@ const AddTask = ({ setTasks }) => {
         />
         <button className="add-task-button" type="submit">Add Task</button>
       </form>
-      <Link to="/login">Logout</Link> {/* Link added here */}
+      <Link to="/login" className="logout-link">Logout</Link>
     </div>
   );
 };

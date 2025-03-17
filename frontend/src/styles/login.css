@@ -65,3 +65,23 @@
   background-color: #84397e;
   transform: scale(1.05);
 }
+
+/* Link Styling for "Let's Start" */
+.start-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background-color: rgb(178, 17, 146);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.start-link:hover {
+  background-color: #42a150;
+  color: white;
+  transform: scale(1.05);
+}
+

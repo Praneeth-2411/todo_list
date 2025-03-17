@@ -42,7 +42,7 @@ const Login = () => {
         <button type="submit">Log In</button>
       </form>
 
-      {isLoggedIn && <Link to="/addtask">Let's Start</Link>}
+      {isLoggedIn && <Link to="/addtask" className="start-link">Let's Start</Link>}
     </div>
   );
 };
