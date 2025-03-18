@@ -10,11 +10,19 @@ const AddTask = ({ setTasks }) => {
 
   const handleAddTask = async (e) => {
     e.preventDefault();
+    const user_id = parseInt(localStorage.getItem('user_id'), 10); // Convert to integer
+
+    if (!user_id) {
+      console.error('User not logged in');
+      return;
+    }
+
     try {
       const res = await axios.post('http://localhost:5123/tasks', {
         task_name: taskName,
         due_date: dueDate,
         category,
+        user_id, // Include user_id in request
       });
       if (res.status === 201) {
         setTasks(prevTasks => [...prevTasks, res.data]);
@@ -26,7 +34,6 @@ const AddTask = ({ setTasks }) => {
       console.error('Error adding task:', error);
     }
   };
-  
 
   return (
     <div className="add-task-container">

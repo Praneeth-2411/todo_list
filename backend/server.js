@@ -23,8 +23,10 @@ db.connect((err) => {
   }
 });
 
-app.get('/tasks', (req, res) => {
-  db.query('SELECT * FROM tasks', (err, results) => {
+// Fetch tasks for a specific user
+app.get('/tasks/:user_id', (req, res) => {
+  const userId = req.params.user_id;
+  db.query('SELECT * FROM tasks WHERE user_id = ?', [userId], (err, results) => {
     if (err) {
       res.status(500).send('Error fetching tasks');
     } else {
@@ -34,10 +36,10 @@ app.get('/tasks', (req, res) => {
 });
 
 app.post('/tasks', (req, res) => {
-  const { task_name, due_date, category, completed = false } = req.body;
+  const { task_name, due_date, category, completed = false, user_id } = req.body;
   db.query(
-    'INSERT INTO tasks (task_name, due_date, category, completed) VALUES (?, ?, ?, ?)',
-    [task_name, due_date, category, completed],
+    'INSERT INTO tasks (task_name, due_date, category, completed, user_id) VALUES (?, ?, ?, ?, ?)',
+    [task_name, due_date, category, completed, user_id],
     (err, result) => {
       if (err) {
         res.status(500).send('Error adding task');
@@ -48,14 +50,15 @@ app.post('/tasks', (req, res) => {
           due_date,
           category,
           completed,
+          user_id
         };
-        res.status(201).json(newTask); 
+        res.status(201).json(newTask);
       }
     }
   );
 });
 
-
+// Keep your existing DELETE request
 app.delete('/tasks/:id', (req, res) => {
   const taskId = req.params.id;
   db.query('DELETE FROM tasks WHERE id = ?', [taskId], (err, result) => {
@@ -74,6 +77,7 @@ app.delete('/tasks/:id', (req, res) => {
   });
 });
 
+// Keep your existing UPDATE request
 app.put('/tasks/:id', (req, res) => {
   const taskID = req.params.id;
   const { completed } = req.body;
@@ -91,7 +95,7 @@ app.put('/tasks/:id', (req, res) => {
   );
 });
 
-// Signup Route
+// Keep your existing Signup Route
 app.post('/signup', (req, res) => {
   const { username, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
@@ -109,7 +113,7 @@ app.post('/signup', (req, res) => {
   );
 });
 
-// Login Route
+// Login Route - Now returns user_id on successful login
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
@@ -123,7 +127,7 @@ app.post('/login', (req, res) => {
       return res.status(400).send('Invalid username or password');
     }
 
-    res.status(200).send('Login successful');
+    res.status(200).json({ message: 'Login successful', user_id: user.id });
   });
 });
 

@@ -11,15 +11,21 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5123/login', { username, password });
-      alert('Login successful');
-      setIsLoggedIn(true);
+      const res = await axios.post('http://localhost:5123/login', { username, password });
+      const { user_id } = res.data; // Get user_id from response
+      if (user_id) {
+        localStorage.setItem('user_id', user_id); // Store user_id in localStorage
+        alert('Login successful');
+        setIsLoggedIn(true);
+      }
     } catch (error) {
       console.error('Error logging in:', error);
       alert('Login failed');
       setIsLoggedIn(false);
     }
   };
+  
+  
 
   return (
     <div className="login-container">

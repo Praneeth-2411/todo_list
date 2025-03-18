@@ -7,8 +7,15 @@ import '../styles/tasklist.css';
 const TaskList = ({ tasks, setTasks }) => {
   useEffect(() => {
     const fetchTasks = async () => {
+      const user_id = localStorage.getItem('user_id'); // Get logged-in user ID
+      if (!user_id) {
+        console.error('User not logged in');
+        return;
+      }
+
       try {
-        const res = await axios.get('http://localhost:5123/tasks');
+        const res = await axios.get(`http://localhost:5123/tasks/${user_id}`);
+
         setTasks(res.data);
       } catch (error) {
         console.error(error);
@@ -17,7 +24,7 @@ const TaskList = ({ tasks, setTasks }) => {
     };
 
     fetchTasks();
-  }, [setTasks]);  // Removed tasks dependency to avoid infinite loop
+  }, [setTasks]); // Removed tasks dependency to avoid infinite loop
 
   const incompleteTasks = tasks.filter(task => !task.completed);
   const completedTasks = tasks.filter(task => task.completed);
@@ -31,14 +38,13 @@ const TaskList = ({ tasks, setTasks }) => {
       alert('Error deleting task');
     }
   };
-  
-  
+
   const toggleTaskCompletion = async (taskId, currentStatus) => {
     try {
       const { status } = await axios.put(`http://localhost:5123/tasks/${taskId}`, {
         completed: !currentStatus
       });
-  
+
       if (status === 200) {
         setTasks(prevTasks =>
           prevTasks.map(task =>
@@ -50,7 +56,7 @@ const TaskList = ({ tasks, setTasks }) => {
       console.error('Error updating the task:', error);
     }
   };
-  
+
   return (
     <div className="task-list">
       <h2 className="task-list-heading1">Pending Tasks</h2>
