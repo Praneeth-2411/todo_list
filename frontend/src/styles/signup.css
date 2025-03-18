@@ -65,3 +65,23 @@
   background-color: #84397e;
   transform: scale(1.05);
 }
+
+
+.signup-back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.signup-back-button:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+}
