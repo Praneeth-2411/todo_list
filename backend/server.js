@@ -42,11 +42,19 @@ app.post('/tasks', (req, res) => {
       if (err) {
         res.status(500).send('Error adding task');
       } else {
-        res.status(201).send('Task added');
+        const newTask = {
+          id: result.insertId,
+          task_name,
+          due_date,
+          category,
+          completed,
+        };
+        res.status(201).json(newTask); 
       }
     }
   );
 });
+
 
 app.delete('/tasks/:id', (req, res) => {
   const taskId = req.params.id;

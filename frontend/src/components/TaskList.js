@@ -25,20 +25,21 @@ const TaskList = ({ tasks, setTasks }) => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5123/tasks/${id}`);
-      setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
+      setTasks(prevTasks => prevTasks.filter(task => task.id !== id)); 
     } catch (error) {
       console.error('Error deleting task:', error);
       alert('Error deleting task');
     }
   };
-
+  
+  
   const toggleTaskCompletion = async (taskId, currentStatus) => {
     try {
-      const response = await axios.put(`http://localhost:5123/tasks/${taskId}`, {
+      const { status } = await axios.put(`http://localhost:5123/tasks/${taskId}`, {
         completed: !currentStatus
       });
-
-      if (response.status === 200) {
+  
+      if (status === 200) {
         setTasks(prevTasks =>
           prevTasks.map(task =>
             task.id === taskId ? { ...task, completed: !currentStatus } : task
@@ -49,7 +50,7 @@ const TaskList = ({ tasks, setTasks }) => {
       console.error('Error updating the task:', error);
     }
   };
-
+  
   return (
     <div className="task-list">
       <h2 className="task-list-heading1">Pending Tasks</h2>

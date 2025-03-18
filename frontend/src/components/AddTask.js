@@ -16,7 +16,9 @@ const AddTask = ({ setTasks }) => {
         due_date: dueDate,
         category,
       });
-      setTasks(prevTasks => [...prevTasks, res.data]);
+      if (res.status === 201) {
+        setTasks(prevTasks => [...prevTasks, res.data]);
+      }
       setTaskName('');
       setDueDate('');
       setCategory('');
@@ -24,6 +26,7 @@ const AddTask = ({ setTasks }) => {
       console.error('Error adding task:', error);
     }
   };
+  
 
   return (
     <div className="add-task-container">
