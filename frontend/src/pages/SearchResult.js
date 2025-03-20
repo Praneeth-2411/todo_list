@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/search.css';
 
-const SearchResult = ({ searchTerm }) => {
+const SearchResult = () => {
   const [tasks, setTasks] = useState([]);
-  const user_id = localStorage.getItem('user_id'); // ✅ Get user_id
+  const user_id = localStorage.getItem('user_id');
+  const searchTerm = localStorage.getItem('searchTerm');
 
   useEffect(() => {
     if (searchTerm && user_id) {
-      axios.post('http://localhost:5123/search', { searchTerm, user_id }) // ✅ Now uses POST request
+      axios.post('http://localhost:5123/search', { searchTerm, user_id })
         .then((res) => setTasks(res.data))
         .catch((err) => console.error('Error fetching search results:', err));
     }
-  }, [searchTerm, user_id]); // ✅ Depend on both searchTerm & user_id
+  }, [searchTerm, user_id]);
 
   return (
     <div className="search-container">
@@ -31,10 +32,10 @@ const SearchResult = ({ searchTerm }) => {
           </thead>
           <tbody>
             {tasks.map(task => (
-              <tr key={task.id} className={task.completed ? 'completed-task' : 'pending-task'}>
+              <tr key={task._id} className={task.completed ? 'Completed-task' : 'p\Pending-task'}>
                 <td>{task.task_name}</td>
                 <td>{task.category}</td>
-                <td>{task.due_date || "No Due Date"}</td>
+                <td>{task.due_date ? new Date(task.due_date).toLocaleDateString() : "No Due Date"}</td>
                 <td>{task.completed ? "Completed" : "Pending"}</td>
               </tr>
             ))}
@@ -50,3 +51,4 @@ const SearchResult = ({ searchTerm }) => {
 };
 
 export default SearchResult;
+

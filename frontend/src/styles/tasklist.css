@@ -1,88 +1,96 @@
-/* Task List Page */
-.task-list {
+.task-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: -30px;
   width: 100%;
-  max-width: 900px;
-  margin: 20px auto; /* Centered with margin */
+  height: auto;
   font-family: Arial, sans-serif;
-  text-align: center; /* Center the content */
+  padding: 30px;
+  background-image: url('/public/A_T.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-y: auto;
+  transition: background 0.5s ease-in-out;
+  gap: 30px;
+}
+
+.task-list-container:hover {
+  transition: filter 0.5s ease-in-out;
 }
 
 .task-list-heading1 {
   margin-top: 30px;
-  font-size: 24px;
+  font-size: 32px;
   margin-bottom: 10px;
-  color: rgb(228, 92, 13)
+  font-style: italic;
+  color: rgb(255, 255, 255);
 }
 
 .task-list-heading2 {
   margin-top: 30px;
-  font-size: 24px;
+  font-size: 32px;
+  font-style: italic;
   margin-bottom: 10px;
-  color: rgb(49, 204, 93)
+  color: rgb(255, 255, 255);
 }
 
 .task-table {
-  width: 100%;
+  width: 80%;
   max-width: 800px;
-  margin: 0 auto 60px auto; /* Centered and space at the bottom */
-  margin-top: 22px;
+  margin-top: 20px;
   border-collapse: collapse;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-th, td {
+.task-table th, td {
   padding: 12px;
   text-align: left;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
 }
 
-th {
-  background-color: #00d0ff;
+.task-table th {
+  background-color: #000000;  
   color: rgb(255, 255, 255);
-  font-size: 18px;
+  font-size: 20px;
 }
 
-td {
-  background-color: #ffffff;
-  font-size: 16px;
+.pending-task td {
+  background-color: #f6dbb2;
 }
 
-tr:nth-child(even) td {
-  background-color: #f2f2f2;
+.completed-task td {
+  background-color: #9ff0b2;
 }
 
-tr:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  transition: background-color 0.2s ease-in-out;
-}
-
-.pending-task {
-  background-color: #ffebcc;
-  transition: all 0.2s ease-in-out;
-}
-
-.pending-task:hover {
+.pending-task:hover td{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
 }
 
-.completed-task {
+.completed-task td{
   background-color: #d4edda;
   transition: all 0.2s ease-in-out;
 }
 
-.completed-task:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
+
+.task-table tr:hover {
+  background-color: rgba(0, 0, 0, 0.1); 
+  transform: scale(1.005);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  transition: all 0.2s ease-in-out;
 }
 
+
 button.delete {
-  background-color: #ff0000;
+  background-color: #d17575;
   color: white;
   padding: 5px 10px;
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.03s ease-in-out;
 }
 
 button.delete:hover {

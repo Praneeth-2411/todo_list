@@ -14,8 +14,7 @@ const Login = () => {
       const res = await axios.post('http://localhost:5123/login', { username, password });
       const { user_id } = res.data; // Get user_id from response
       if (user_id) {
-        localStorage.setItem('user_id', user_id); // Store user_id in localStorage
-        alert('Login successful');
+        localStorage.setItem('user_id', String(user_id)); // Store user_id in localStorage
         setIsLoggedIn(true);
       }
     } catch (error) {
@@ -54,6 +53,8 @@ const Login = () => {
 
         {isLoggedIn && <Link to="/addtask" className="start-link">Let's Start</Link>}
       </div>
+      <p className="lauth-quote">"People's dreams never END!"</p>
+      <p className="lauth">- Marshall D. Teach</p>
     </div>
   );
 };

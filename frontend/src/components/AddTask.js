@@ -10,27 +10,29 @@ const AddTask = ({ setTasks, setSearchTerm }) => {
 
   const handleAddTask = async (e) => {
     e.preventDefault();
-
+  
     const user_id = localStorage.getItem('user_id');
-    if (!user_id || isNaN(user_id)) {
-      console.error('User ID is missing or invalid');
+    console.log("Retrieved user_id from localStorage:", user_id); // Debugging step
+  
+    if (!user_id) {
+      console.error('User ID is missing');
       alert("User not logged in. Please login first.");
       return;
     }
-
+  
     try {
       const res = await axios.post('http://localhost:5123/tasks', {
         task_name: taskName,
         due_date: dueDate,
         category,
-        user_id: parseInt(user_id, 10),
+        user_id: user_id.trim(), // Ensure no extra spaces
       });
-
+  
       if (res.status === 201) {
         console.log("Task added:", res.data);
         setTasks(prevTasks => [...prevTasks, res.data]);
       }
-
+  
       setTaskName('');
       setDueDate('');
       setCategory('');
@@ -39,6 +41,7 @@ const AddTask = ({ setTasks, setSearchTerm }) => {
       alert(error.response?.data?.error || "Failed to add task. Please try again.");
     }
   };
+  
 
   return (
     <div className="add-task-container">

@@ -1,17 +1,47 @@
-.search-wrapper {
+.search-bar-container {
   display: flex;
-  justify-content: center;
-  margin-top: 90px;  /* ✅ Push it down from the top */
-  margin-bottom: 0px;  /* ✅ Space before the Add Task box */
+  flex-direction: column;
+  align-items: center;
+  margin-left: -22px;
   width: 100%;
+  height: auto;
+  font-family: Arial, sans-serif;
+  padding: 30px;
+  background-image: url('/public/A_T.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-y: auto;
+  transition: background 0.5s ease-in-out;
+  gap: 10px;
 }
 
-.search-bar {
-  display: flex;
-  justify-content: center; 
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* ✅ Subtle shadow for separation */
+.search-bar-container:hover {
+  transition: filter 0.5s ease-in-out;
 }
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-image: url('/public/SR.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-y: auto;
+  transition: background 0.5s ease-in-out;
+  gap: 20px; /* ✅ Consistent spacing */
+}
+
+.search-container:hover {
+  background-size: 110%; /* ✅ Subtle zoom effect */
+  transition: background-size 0.3s ease-in-out;
+}
+
 
 
 .search-input {
@@ -29,7 +59,7 @@
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  background-color: #47a8d9;
+  background-color: #9048c0;
   color: white;
   border-radius: 8px;
   text-decoration: none; /* ✅ Removes underline */
@@ -38,7 +68,7 @@
 
 .search-button:hover {
   transform: scale(1.1); /* ✅ Smooth zoom effect */
-  background-color: #977ed8
+  background-color: #000000
 }
 
 
@@ -59,61 +89,63 @@
   border-collapse: collapse;
 }
 
-th, td {
+.search-table th, td {
   padding: 12px;
   text-align: left;
   border: 1px solid #ddd;
 }
 
-th {
-  background-color: #00d0ff;
+.search-table th {
+  background-color: #000000;
   color: white;
   font-size: 18px;
 }
 
-td {
-  background-color: #ffffff;
+.search-table td {
+  background-color: #f8aef8;
   font-size: 16px;
 }
 
-tr:nth-child(even) td {
-  background-color: #f2f2f2;
+.search-table tr:nth-child(even) td {
+  background-color: #85e3f4;
 }
 
-tr:hover {
+.search-table tr:hover {
   background-color: rgba(0, 0, 0, 0.05);
   transition: background-color 0.2s ease-in-out;
 }
 
-/* Pending Task */
-.pending-task {
+.search-container p {
+  color: white;
+}
+
+.Pending-task {
   background-color: #ffebcc;
   transition: all 0.2s ease-in-out;
 }
 
-.pending-task:hover {
+.Pending-task:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
 }
 
-/* Completed Task */
-.completed-task {
+.Completed-task {
   background-color: #d4edda;
   transition: all 0.2s ease-in-out;
 }
 
-.completed-task:hover {
+.Completed-task:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
 }
 
-/* Back to Add Task Link */
+
 .back-link {
-  display: block; /* ✅ Makes it take full width */
-  width: fit-content; /* ✅ Only take the necessary width */
-  margin: 20px auto; /* ✅ Centers it horizontally */
+  display: block; 
+  width: fit-content; 
+  margin: 20px auto; 
   padding: 12px 24px;
-  background-color: #007bff;
+  background-color: #c55ba1;
   color: white;
   font-weight: bold;
   border-radius: 8px;
@@ -126,6 +158,6 @@ tr:hover {
 .back-link:hover {
   text-decoration: none;
   transform: scale(1.05);
-  background-color: #0056b3;
+  background-color: #84397e;
 }
 

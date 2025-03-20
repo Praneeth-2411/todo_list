@@ -1,37 +1,44 @@
-/* Add Task Page */
 body {
-  background-image: url('/public/BG.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden;
 }
 
 .add-task-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
+  margin-left: -27px;
+  width: 100%;
+  height: 700px;
   font-family: Arial, sans-serif;
-  padding: 20px;
+  padding: 30px;
+  background-image: url('/public/A_T.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-y: auto;
+  transition: background 0.5s ease-in-out;
+  gap:5px; 
 }
+
+.add-task-container:hover {
+  transition: filter 0.5s ease-in-out;
+}
+
 
 .add-task-container h2 {
   font-size: 2rem;
-  color: #fff;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
 .add-task-form {
-  background-color: #977ed8;
-  padding: 25px;
+  background-color: #ebe9e9;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 32px rgb(169, 57, 145);
   margin-bottom: 20px;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -40,7 +47,7 @@ body {
 }
 
 .add-task-input {
-  width: 95%;
+  width: 100%;
   padding: 12px;
   margin-bottom: 20px;
   border: 1px solid #943780;
@@ -72,17 +79,7 @@ body {
   transform: scale(1.05);
 }
 
-.add-task-button[type="submit"] {
-  color: white;
-  font-weight: bold;
-}
 
-.add-task-button[type="submit"]:hover {
-  color: white;
-}
-
-
-/* Link Styling for "Logout" */
 .logout-link {
   display: inline-block;
   margin-top: 20px;

@@ -16,11 +16,11 @@ const App = () => {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const user_id = localStorage.getItem('user_id');
+      const user_id = localStorage.getItem('user_id'); // ✅ Get user_id from localStorage
       if (!user_id) return;
 
       try {
-        const res = await axios.get(`http://localhost:5123/tasks/${user_id}`);
+        const res = await axios.get(`http://localhost:5123/tasks/${user_id}`); // ✅ MongoDB API call
         setTasks(res.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -38,9 +38,7 @@ const App = () => {
           <Route path="/login" component={Login} />
           <Route path="/" exact component={Home} />
           <Route path="/addtask" exact>
-            <div className="search-wrapper">  {/* ✅ Separate container for SearchBar */}
-              <SearchBar setSearchTerm={setSearchTerm} />
-            </div>
+            <SearchBar setSearchTerm={setSearchTerm} />         
             <AddTask setTasks={setTasks} />
             <TaskList tasks={tasks} setTasks={setTasks} />
           </Route>

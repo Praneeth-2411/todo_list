@@ -1,11 +1,10 @@
-/* Login Page */
-.login-form {
+.login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url('/public/BG.png');  /* Background image added */
+  background-image: url('/public/S_L.png');  /* Background image added */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -19,18 +18,17 @@
 }
 
 .login-form {
-  background-color: rgba(151, 126, 216, 0.9);  /* Slight transparency */
-  padding: 30px;
+  padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgb(194, 111, 199);
   width: 100%;
   max-width: 500px;
-  text-align: center;  /* Ensure text inside is centered */
-  margin: 0 auto; /* Horizontally center the form */
+  text-align: center;  
+  margin: 0 auto; 
 }
 
 .login-form h2 {
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 20px;
   font-size: 2rem;
 }
@@ -63,35 +61,15 @@
 
 .login-form button:hover {
   background-color: #84397e;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
-
-/* Link Styling for "Let's Start" */
-.start-link {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  color: #ffffff;
-  background-color: rgb(178, 17, 146);
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.start-link:hover {
-  background-color: #42a150;
-  color: white;
-  transform: scale(1.05);
-}
-
 
 .login-back-button {
   position: absolute;
   top: 10px;
   left: 10px;
   text-decoration: none;
-  color: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-weight: bold;
   background: transparent;
@@ -101,9 +79,45 @@
 }
 
 .login-back-button:hover {
-  color: #ffffff;
+  color: #000000;
   transform: scale(1.1);
 }
 
 
+.start-link {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 20px;
+  background-color: #918b8b;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
 
+.start-link:hover {
+  background-color: #000000;
+  transform: scale(1.05);
+}
+
+.lauth-quote {
+  position: fixed;
+  bottom: 100px;
+  left: 70%;
+  transform: translateX(-50%);
+  color: rgb(0, 0, 0);
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.8;
+}
+.lauth{
+  position: fixed;
+  bottom: 70px;
+  left: 75%;
+  transform: translateX(-50%);
+  color: rgb(0, 0, 0);
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.8;
+}

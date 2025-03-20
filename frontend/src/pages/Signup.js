@@ -43,6 +43,8 @@ const Signup = () => {
           <button type="submit">Sign Up</button>
         </form>
       </div>
+      <p className="sauth-quote">"People's dreams never END!"</p>
+      <p className="sauth">- Marshall D. Teach</p>
     </div>
   );
 };

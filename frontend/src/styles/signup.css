@@ -1,11 +1,10 @@
-/* Signup Page */
-.signup-form {
+.signup-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url('/public/BG.png');  /* Background image added */
+  background-image: url('/public/S_L.png');  /* Background image added */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -19,10 +18,9 @@
 }
 
 .signup-form {
-  background-color: rgba(255, 255, 255, 0.9);  /* Slight transparency */
-  padding: 30px;
+  padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgb(194, 111, 199);
   width: 100%;
   max-width: 500px;
   text-align: center;  /* Ensure text inside is centered */
@@ -30,7 +28,7 @@
 }
 
 .signup-form h2 {
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 20px;
   font-size: 2rem;
 }
@@ -63,7 +61,7 @@
 
 .signup-form button:hover {
   background-color: #84397e;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 
@@ -72,7 +70,7 @@
   top: 10px;
   left: 10px;
   text-decoration: none;
-  color: #ffffff;
+  color: #000000;
   font-size: 18px;
   font-weight: bold;
   background: transparent;
@@ -82,6 +80,29 @@
 }
 
 .signup-back-button:hover {
-  color: #ffffff;
+  color: #000000;
   transform: scale(1.1);
 }
+
+.sauth-quote {
+  position: fixed;
+  bottom: 100px;
+  left: 70%;
+  transform: translateX(-50%);
+  color: rgb(0, 0, 0);
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.8;
+}
+.sauth{
+  position: fixed;
+  bottom: 70px;
+  left: 75%;
+  transform: translateX(-50%);
+  color: rgb(0, 0, 0);
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+
