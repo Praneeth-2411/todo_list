@@ -1,3 +1,4 @@
+/* ✅ Search Box Styling (Now Uniform with AddTask Page) */
 .search-bar-container {
   display: flex;
   flex-direction: column;
@@ -7,7 +8,7 @@
   height: auto;
   font-family: Arial, sans-serif;
   padding: 30px;
-  background-image: url('/public/A_T.jpg');
+  background-image: url('/public/A_T.jpg'); /* Matches AddTask background */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -20,6 +21,48 @@
   transition: filter 0.5s ease-in-out;
 }
 
+/* ✅ Search Input Styling (Matches AddTask Inputs) */
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  border: 2px solid #9048c0; /* Same border color */
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  background-color: white;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+  border-color: #c55ba1; /* Matches focus effect */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* ✅ Search Button (Uniform with AddTask Button) */
+.search-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #9048c0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.search-button:hover {
+  transform: scale(1.1);
+  background-color: #000000;
+}
+
+/* ✅ Search Results Container (Matches Task List Table) */
 .search-container {
   display: flex;
   flex-direction: column;
@@ -34,53 +77,23 @@
   background-attachment: fixed;
   overflow-y: auto;
   transition: background 0.5s ease-in-out;
-  gap: 20px; /* ✅ Consistent spacing */
+  gap: 20px;
 }
 
 .search-container:hover {
-  background-size: 110%; /* ✅ Subtle zoom effect */
+  background-size: 110%;
   transition: background-size 0.3s ease-in-out;
 }
 
-
-
-.search-input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px;
-  outline: none;
-  width: 300px;
-}
-
-.search-button {
-  display: inline-block; /* ✅ Ensures it behaves like a button */
-  padding: 9px 18px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  background-color: #9048c0;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none; /* ✅ Removes underline */
-  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-}
-
-.search-button:hover {
-  transform: scale(1.1); /* ✅ Smooth zoom effect */
-  background-color: #000000
-}
-
-
+/* ✅ Search Heading (Same as AddTask Headings) */
 .search-heading {
   text-align: center;
-  margin-top: 30px;
   font-size: 24px;
   margin-bottom: 10px;
   color: rgb(255, 255, 255);
 }
 
-/* Styled table for search results */
+/* ✅ Table Styling (Same as Task Table) */
 .search-table {
   width: 100%;
   max-width: 800px;
@@ -115,10 +128,7 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.search-container p {
-  color: white;
-}
-
+/* ✅ Status Row Styling */
 .Pending-task {
   background-color: #ffebcc;
   transition: all 0.2s ease-in-out;
@@ -139,11 +149,11 @@
   transform: scale(1.02);
 }
 
-
+/* ✅ Back Link (Same as AddTask Page) */
 .back-link {
-  display: block; 
-  width: fit-content; 
-  margin: 20px auto; 
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
   padding: 12px 24px;
   background-color: #c55ba1;
   color: white;
@@ -156,8 +166,6 @@
 }
 
 .back-link:hover {
-  text-decoration: none;
   transform: scale(1.05);
   background-color: #84397e;
 }
-

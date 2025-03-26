@@ -17,13 +17,12 @@ body {
   background-attachment: fixed;
   overflow-y: auto;
   transition: background 0.5s ease-in-out;
-  gap:5px; 
+  gap: 5px;
 }
 
 .add-task-container:hover {
   transition: filter 0.5s ease-in-out;
 }
-
 
 .add-task-container h2 {
   font-size: 2rem;
@@ -46,6 +45,7 @@ body {
   transform: scale(1.03);
 }
 
+/* ✅ Input Field Styling */
 .add-task-input {
   width: 100%;
   padding: 12px;
@@ -54,14 +54,67 @@ body {
   border-radius: 4px;
   font-size: 16px;
   transition: all 0.2s ease-in-out;
-  box-sizing: border-box; /* Ensures padding doesn't affect width calculation */
+  box-sizing: border-box;
+  background-color: white;
+  text-align: center;
 }
 
-.add-task-input:hover {
+/* ✅ Category Dropdown Styling (Matches Input Box) */
+.category-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.category-box {
+  width: 95%;
+  padding: 12px;
+  border: 1px solid #943780;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.category-box:hover {
   border-color: #ffffff;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
+/* ✅ Dropdown Menu (Hidden by Default) */
+.category-options {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: #ebe9e9;
+  border: 1px solid #943780;
+  border-radius: 4px;
+  margin-top: 5px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.category-container.active .category-options {
+  display: block;
+}
+
+/* ✅ Individual Category Option */
+.category-option {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s ease-in-out;
+}
+
+.category-option:hover {
+  background-color: #c55ba1;
+  color: white;
+}
+
+/* ✅ Fix Add Task Button */
 .add-task-button {
   background-color: #c55ba1;
   color: white;
@@ -79,7 +132,7 @@ body {
   transform: scale(1.05);
 }
 
-
+/* ✅ Fix Logout Button */
 .logout-link {
   display: inline-block;
   margin-top: 20px;
@@ -97,3 +150,36 @@ body {
   color: white;
   transform: scale(1.05);
 }
+
+/* ✅ New Save and Cancel Button Styles */
+button {
+  margin-right: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* New CSS class for Save and Cancel buttons */
+button {
+  padding: 8px 15px;
+  background-color: #c55ba1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #84397e;
+}
+.task-table td:last-child {
+  text-align: center;
+  white-space: nowrap;
+}
+

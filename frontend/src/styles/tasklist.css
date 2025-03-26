@@ -97,3 +97,6 @@ button.delete:hover {
   background-color: #cc0000;
   transform: scale(1.05);
 }
+.checkbox-not-allowed {
+  cursor: not-allowed; /* ✅ Changes cursor to '🚫 not-allowed' */
+}

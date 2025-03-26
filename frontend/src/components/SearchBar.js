@@ -12,7 +12,6 @@ const SearchBar = () => {
       localStorage.removeItem('searchTerm');
     }
   };
-  
 
   return (
     <div className="search-bar-container">

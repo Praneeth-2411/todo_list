@@ -3,49 +3,65 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styles/addtask.css';
 
-const AddTask = ({ setTasks, setSearchTerm }) => {
+const AddTask = ({ setTasks }) => {
   const [taskName, setTaskName] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [time, setTime] = useState('');
   const [category, setCategory] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const categories = ["Study", "Work/Projects", "Play", "Outing", "Leisure", "Household", "Personal", "Others"];
 
   const handleAddTask = async (e) => {
     e.preventDefault();
-  
+
     const user_id = localStorage.getItem('user_id');
-    console.log("Retrieved user_id from localStorage:", user_id); // Debugging step
-  
     if (!user_id) {
-      console.error('User ID is missing');
       alert("User not logged in. Please login first.");
       return;
     }
-  
+
+    if (!dueDate || !time) {
+      alert("Please select a valid date and time.");
+      return;
+    }
+
+    if (!category) {
+      alert("Please select a category.");
+      return;
+    }
+
+    const due_datetime = new Date(`${dueDate}T${time}:00`);
+
+    if (isNaN(due_datetime.getTime())) {
+      alert("Invalid date-time format. Please enter a valid date and time.");
+      return;
+    }
+
     try {
       const res = await axios.post('http://localhost:5123/tasks', {
         task_name: taskName,
-        due_date: dueDate,
+        due_datetime,
         category,
-        user_id: user_id.trim(), // Ensure no extra spaces
+        user_id: user_id.trim(),
       });
-  
+
       if (res.status === 201) {
-        console.log("Task added:", res.data);
         setTasks(prevTasks => [...prevTasks, res.data]);
       }
-  
+
       setTaskName('');
       setDueDate('');
+      setTime('');
       setCategory('');
+      setDropdownOpen(false);
     } catch (error) {
-      console.error('Error adding task:', error.response?.data || error.message);
-      alert(error.response?.data?.error || "Failed to add task. Please try again.");
+      alert("Failed to add task. Please try again.");
     }
   };
-  
 
   return (
     <div className="add-task-container">
-      
       <h2>Add New Task</h2>
 
       <form className="add-task-form" onSubmit={handleAddTask}>
@@ -65,12 +81,24 @@ const AddTask = ({ setTasks, setSearchTerm }) => {
           required
         />
         <input
-          type="text"
+          type="time"
           className="add-task-input"
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+          required
         />
+
+        <div className={`category-container ${dropdownOpen ? 'active' : ''}`} onClick={() => setDropdownOpen(!dropdownOpen)}>
+          <div className="category-box">{category || "Select Category"}</div>
+          <div className="category-options">
+            {categories.map((cat) => (
+              <div key={cat} className="category-option" onClick={() => { setCategory(cat); setDropdownOpen(false); }}>
+                {cat}
+              </div>
+            ))}
+          </div>
+        </div>
+
         <button className="add-task-button" type="submit">Add Task</button>
       </form>
 
