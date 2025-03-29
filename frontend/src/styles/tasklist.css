@@ -1,3 +1,4 @@
+/* ✅ Task List Container */
 .task-list-container {
   display: flex;
   flex-direction: column;
@@ -16,26 +17,25 @@
   gap: 30px;
 }
 
-.task-list-container:hover {
-  transition: filter 0.5s ease-in-out;
+.dark-mode .task-list-container {
+  background-image: url('/public/A_T_D.jpg'); /* Dark mode background */
 }
 
-.task-list-heading1 {
+/* ✅ Task List Headings */
+.task-list-heading1, .task-list-heading2 {
   margin-top: 30px;
   font-size: 32px;
   margin-bottom: 10px;
   font-style: italic;
-  color: rgb(255, 255, 255);
+  color: rgb(82, 76, 76);
 }
 
-.task-list-heading2 {
-  margin-top: 30px;
-  font-size: 32px;
-  font-style: italic;
-  margin-bottom: 10px;
-  color: rgb(255, 255, 255);
+.dark-mode .task-list-heading1, 
+.dark-mode .task-list-heading2 {
+  color: #ffffff;
 }
 
+/* ✅ Task Table */
 .task-table {
   width: 80%;
   max-width: 800px;
@@ -51,38 +51,49 @@
 }
 
 .task-table th {
-  background-color: #000000;  
+  background-color: #000000;
   color: rgb(255, 255, 255);
   font-size: 20px;
 }
 
+.dark-mode .task-table th {
+  background-color: #000000;
+}
+
+/* ✅ Pending & Completed Task Styling */
 .pending-task td {
   background-color: #f6dbb2;
+  border: 2px solid white;
+}
+
+.dark-mode .pending-task td {
+  background-color: #d98740;
+  border: 2px solid black;
 }
 
 .completed-task td {
   background-color: #9ff0b2;
+  border: 2px solid white;
 }
 
-.pending-task:hover td{
+.dark-mode .completed-task td {
+  background-color: #67a24e;
+  border: 2px solid black;
+}
+
+.pending-task:hover td,
+.completed-task:hover td {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
-}
-
-.completed-task td{
-  background-color: #d4edda;
   transition: all 0.2s ease-in-out;
 }
 
 
-.task-table tr:hover {
-  background-color: rgba(0, 0, 0, 0.1); 
-  transform: scale(1.005);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-  transition: all 0.2s ease-in-out;
+.dark-mode .task-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-
+/* ✅ Delete Button */
 button.delete {
   background-color: #d17575;
   color: white;
@@ -93,10 +104,20 @@ button.delete {
   transition: all 0.03s ease-in-out;
 }
 
+.dark-mode button.delete {
+  background-color: #b34949;
+}
+
 button.delete:hover {
   background-color: #cc0000;
   transform: scale(1.05);
 }
+
+.dark-mode button.delete:hover {
+  background-color: #a83232;
+}
+
+/* ✅ Checkbox Not Allowed */
 .checkbox-not-allowed {
-  cursor: not-allowed; /* ✅ Changes cursor to '🚫 not-allowed' */
+  cursor: not-allowed; /* 🚫 Cursor change */
 }

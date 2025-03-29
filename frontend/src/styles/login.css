@@ -4,17 +4,23 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url('/public/S_L.png');  /* Background image added */
+  background-image: url('/public/S_L.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   margin: 0;
   padding: 0;
-  position: absolute; /* Ensure full-screen coverage */
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  transition: background 0.3s ease-in-out;
+}
+
+.dark-mode .login-container {
+  
+  background-image: url('/public/S_L_D.jpeg');
 }
 
 .login-form {
@@ -23,14 +29,18 @@
   box-shadow: 0 8px 16px rgb(194, 111, 199);
   width: 100%;
   max-width: 500px;
-  text-align: center;  
-  margin: 0 auto; 
+  text-align: center;
+  margin: 0 auto;
 }
 
 .login-form h2 {
   color: #000000;
   margin-bottom: 20px;
   font-size: 2rem;
+}
+
+.dark-mode .login-form h2 {
+  color: #ffffff;
 }
 
 .login-form input {
@@ -40,6 +50,12 @@
   border: 1px solid #943780;
   border-radius: 4px;
   font-size: 16px;
+}
+
+.dark-mode .login-form input {
+  background-color: #333;
+  color: #ffffff;
+  border-color: #c55ba1;
 }
 
 .login-form input:hover {
@@ -59,9 +75,17 @@
   transition: all 0.2s ease-in-out;
 }
 
+.dark-mode .login-form button {
+  background-color: #6a1b9a;
+}
+
 .login-form button:hover {
   background-color: #84397e;
   transform: scale(1.02);
+}
+
+.dark-mode .login-form button:hover {
+  background-color: #4a148c;
 }
 
 .login-back-button {
@@ -78,11 +102,47 @@
   transition: color 0.2s ease-in-out;
 }
 
+.dark-mode .login-back-button {
+  color: #ffffff;
+}
+
 .login-back-button:hover {
-  color: #000000;
   transform: scale(1.1);
 }
 
+.dark-mode .login-back-button:hover {
+  color: #d4d4d4;
+}
+
+.lauth-quote {
+  position: fixed;
+  bottom: 100px;
+  left: 70%;
+  transform: translateX(-50%);
+  color: rgb(0, 0, 0);
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.dark-mode .lauth-quote {
+  color: #d4d4d4;
+}
+
+.lauth {
+  position: fixed;
+  bottom: 70px;
+  left: 75%;
+  transform: translateX(-50%);
+  color: rgb(0, 0, 0);
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.dark-mode .lauth {
+  color: #d4d4d4;
+}
 
 .start-link {
   display: inline-block;
@@ -96,28 +156,16 @@
   transition: all 0.2s ease-in-out;
 }
 
+.dark-mode .start-link {
+  background-color: #555;
+}
+
 .start-link:hover {
   background-color: #000000;
   transform: scale(1.05);
 }
 
-.lauth-quote {
-  position: fixed;
-  bottom: 100px;
-  left: 70%;
-  transform: translateX(-50%);
-  color: rgb(0, 0, 0);
-  font-style: italic;
-  font-size: 18px;
-  opacity: 0.8;
-}
-.lauth{
-  position: fixed;
-  bottom: 70px;
-  left: 75%;
-  transform: translateX(-50%);
-  color: rgb(0, 0, 0);
-  font-style: italic;
-  font-size: 18px;
-  opacity: 0.8;
+.dark-mode .start-link:hover {
+  background-color: #e0e0e0;
+  color: #000;
 }

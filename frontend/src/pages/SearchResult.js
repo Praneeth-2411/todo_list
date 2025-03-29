@@ -175,7 +175,7 @@ const SearchResult = () => {
           </tbody>
         </table>
       ) : (
-        <p>No tasks found.</p>
+        <p className="NT">No tasks found.</p>
       )}
 
       <Link to="/addtask" className="back-link">Back to Add Task</Link>

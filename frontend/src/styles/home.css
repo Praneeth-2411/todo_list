@@ -10,6 +10,12 @@
   background-attachment: fixed;
   margin: 0;
   padding: 0;
+  transition: background 0.3s ease-in-out;
+}
+
+/* ✅ Dark Mode Background */
+.dark-mode .home-container {
+  background-image: url('/public/S_L_D.jpeg'); /* Change this to your dark mode background */
 }
 
 .home-container h2 {
@@ -18,6 +24,12 @@
   color: #000000;
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  transition: color 0.3s ease-in-out;
+}
+
+/* ✅ Dark Mode Heading */
+.dark-mode .home-container h2 {
+  color: #ffffff;
 }
 
 .home-container p {
@@ -25,6 +37,12 @@
   color: #000000;
   margin-bottom: 40px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease-in-out;
+}
+
+/* ✅ Dark Mode Text */
+.dark-mode .home-container p {
+  color: #d4d4d4;
 }
 
 .auth-buttons {
@@ -46,4 +64,43 @@
 .auth-btn:hover {
   background-color: #7b1fa2;
   transform: scale(1.05);
+}
+
+/* ✅ Dark Mode Buttons */
+.dark-mode .auth-btn {
+  background-color: #6a1b9a;
+}
+
+.dark-mode .auth-btn:hover {
+  background-color: #4a148c;
+}
+
+/* ✅ Toggle Button (Top Left) */
+.dark-mode-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  transition: background 0.3s ease-in-out;
+}
+
+/* ✅ Dark Mode Toggle Button */
+.dark-mode .dark-mode-toggle {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark-mode-toggle:hover {
+  background-color: #555;
+}
+
+/* ✅ Dark Mode Toggle Hover */
+.dark-mode .dark-mode-toggle:hover {
+  background-color: #e0e0e0;
 }

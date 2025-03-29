@@ -1,4 +1,4 @@
-/* ✅ Search Box Styling (Now Uniform with AddTask Page) */
+/* ✅ Search Box Styling (Matches AddTask Page) */
 .search-bar-container {
   display: flex;
   flex-direction: column;
@@ -17,8 +17,8 @@
   gap: 10px;
 }
 
-.search-bar-container:hover {
-  transition: filter 0.5s ease-in-out;
+.dark-mode .search-bar-container {
+  background-image: url('/public/A_T_D.jpg'); /* Dark mode version */
 }
 
 /* ✅ Search Input Styling (Matches AddTask Inputs) */
@@ -26,29 +26,36 @@
   width: 100%;
   max-width: 400px;
   padding: 12px;
-  border: 2px solid #9048c0; /* Same border color */
+  border: 2px solid #000000;
   border-radius: 8px;
   font-size: 16px;
   text-align: center;
   background-color: white;
+  color: black;
   transition: all 0.2s ease-in-out;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.dark-mode .search-input {
+  background-color: #202020;
+  color: white;
+  border-color: #c55ba1;
+}
+
 .search-input:focus {
-  border-color: #c55ba1; /* Matches focus effect */
+  border-color: #c55ba1;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
-/* ✅ Search Button (Uniform with AddTask Button) */
+/* ✅ Search Button (Matches AddTask Button) */
 .search-button {
   display: inline-block;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  background-color: #9048c0;
-  color: white;
+  background-color: #262424;
+  color: rgb(222, 235, 147);
   border: none;
   border-radius: 8px;
   text-decoration: none;
@@ -57,9 +64,18 @@
   margin-top: 10px;
 }
 
+.dark-mode .search-button {
+  background-color: #ed90df;
+  color: rgb(0, 0, 0);
+}
+
 .search-button:hover {
   transform: scale(1.1);
   background-color: #000000;
+}
+
+.dark-mode .search-button:hover {
+  background-color: #ffffff;
 }
 
 /* ✅ Search Results Container (Matches Task List Table) */
@@ -71,7 +87,7 @@
   height: 100vh;
   font-family: Arial, sans-serif;
   padding: 20px;
-  background-image: url('/public/SR.jpg');
+  background-image: url('/public/SR.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -80,9 +96,8 @@
   gap: 20px;
 }
 
-.search-container:hover {
-  background-size: 110%;
-  transition: background-size 0.3s ease-in-out;
+.dark-mode .search-container {
+  background-image: url('/public/SRD.jpg'); /* Dark mode version */
 }
 
 /* ✅ Search Heading (Same as AddTask Headings) */
@@ -93,7 +108,22 @@
   color: rgb(255, 255, 255);
 }
 
-/* ✅ Table Styling (Same as Task Table) */
+.dark-mode .search-heading {
+  color: #ffffff;
+}
+
+.NT {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: rgb(255, 255, 255);
+}
+
+.dark-mode .NT {
+  color: #ffffff;
+}
+
+/* ✅ Table Styling (Matches Task Table) */
 .search-table {
   width: 100%;
   max-width: 800px;
@@ -105,7 +135,7 @@
 .search-table th, td {
   padding: 12px;
   text-align: left;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
 }
 
 .search-table th {
@@ -114,40 +144,6 @@
   font-size: 18px;
 }
 
-.search-table td {
-  background-color: #f8aef8;
-  font-size: 16px;
-}
-
-.search-table tr:nth-child(even) td {
-  background-color: #85e3f4;
-}
-
-.search-table tr:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  transition: background-color 0.2s ease-in-out;
-}
-
-/* ✅ Status Row Styling */
-.Pending-task {
-  background-color: #ffebcc;
-  transition: all 0.2s ease-in-out;
-}
-
-.Pending-task:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
-}
-
-.Completed-task {
-  background-color: #d4edda;
-  transition: all 0.2s ease-in-out;
-}
-
-.Completed-task:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
-}
 
 /* ✅ Back Link (Same as AddTask Page) */
 .back-link {
@@ -165,7 +161,15 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.dark-mode .back-link {
+  background-color: #6a1b9a;
+}
+
 .back-link:hover {
   transform: scale(1.05);
   background-color: #84397e;
+}
+
+.dark-mode .back-link:hover {
+  background-color: #4a148c;
 }

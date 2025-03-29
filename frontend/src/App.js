@@ -13,6 +13,13 @@ import SearchBar from './components/SearchBar';
 const App = () => {
   const [tasks, setTasks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem('darkMode') === 'true'
+  );
+
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', darkMode);
+  }, [darkMode]);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -30,24 +37,35 @@ const App = () => {
     fetchTasks();
   }, []);
 
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem('darkMode', newMode);
+    document.body.classList.toggle('dark-mode', newMode);
+  };
+
   return (
     <Router>
       <div className="App">
         <Switch>
+          {/* ✅ Home Page with Dark Mode Toggle */}
+          <Route path="/" exact>
+            <Home toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+          </Route>
+
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
-          <Route path="/" exact component={Home} />
-          
-          {/* ✅ Updated /addtask Route to ensure correct order */}
+
+          {/* ✅ Task Page */}
           <Route path="/addtask" exact>
             <div className="content-container">
-              {/* 🔍 Search Bar at the Top */}
+              {/* 🔍 Search Bar */}
               <SearchBar setSearchTerm={setSearchTerm} />
 
-              {/* ✅ Task List (Pending & Completed) in the middle */}
+              {/* ✅ Task List */}
               <TaskList tasks={tasks} setTasks={setTasks} />
 
-              {/* 📝 Add Task at the Bottom */}
+              {/* 📝 Add Task */}
               <AddTask setTasks={setTasks} />
             </div>
           </Route>

@@ -32,7 +32,6 @@ const AddTask = ({ setTasks }) => {
     }
 
     const due_datetime = new Date(`${dueDate}T${time}:00`);
-
     if (isNaN(due_datetime.getTime())) {
       alert("Invalid date-time format. Please enter a valid date and time.");
       return;
@@ -88,15 +87,28 @@ const AddTask = ({ setTasks }) => {
           required
         />
 
-        <div className={`category-container ${dropdownOpen ? 'active' : ''}`} onClick={() => setDropdownOpen(!dropdownOpen)}>
+        {/* ✅ Fixed Category Dropdown */}
+        <div 
+          className={`category-container ${dropdownOpen ? "active" : ""}`} 
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
           <div className="category-box">{category || "Select Category"}</div>
-          <div className="category-options">
-            {categories.map((cat) => (
-              <div key={cat} className="category-option" onClick={() => { setCategory(cat); setDropdownOpen(false); }}>
-                {cat}
-              </div>
-            ))}
-          </div>
+          {dropdownOpen && (
+            <div className="category-options">
+              {categories.map((cat) => (
+                <div 
+                  key={cat} 
+                  className="category-option" 
+                  onClick={() => { 
+                    setCategory(cat);
+                    setDropdownOpen(false);
+                  }}
+                >
+                  {cat}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <button className="add-task-button" type="submit">Add Task</button>
