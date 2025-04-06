@@ -33,37 +33,45 @@ const SearchResult = () => {
 
   const handleEditClick = (task) => {
     setEditingTaskId(task._id);
-    const istDate = new Date(new Date(task.due_datetime).getTime() + 5.5 * 60 * 60 * 1000);
+  
+    const localDate = new Date(task.due_datetime); // already in local time (IST if your system is)
+  
     setEditedTask({
       task_name: task.task_name || '',
-      due_date: istDate.toISOString().split("T")[0],
-      due_time: istDate.toTimeString().slice(0, 5),
+      due_date: localDate.toISOString().split("T")[0], // yyyy-mm-dd
+      due_time: localDate.toTimeString().slice(0, 5),  // hh:mm (24-hour format)
       category: task.category || '',
       reminder: task.reminder?.toString() || '',
       completed: task.completed || false
     });
   };
+  
 
-  const convertISTtoUTC = (dateStr, timeStr) => {
+  const combineDateTime = (dateStr, timeStr) => {
     const [year, month, day] = dateStr.split("-").map(Number);
     const [hour, minute] = timeStr.split(":").map(Number);
-    const istDate = new Date(year, month - 1, day, hour, minute);
-    const utcTime = new Date(istDate.getTime() - 5.5 * 60 * 60 * 1000);
-    return utcTime.toISOString();
+    const localDate = new Date(year, month - 1, day, hour, minute);
+    return localDate.toISOString(); // Let backend handle the shift
   };
-
+  const format12HourTime = (timeStr) => {
+    const [hour, minute] = timeStr.split(":").map(Number);
+    const ampm = hour >= 12 ? "PM" : "AM";
+    const adjustedHour = hour % 12 || 12;
+    return `${adjustedHour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+  };
+  
   const handleSave = async (id) => {
     try {
       const due_date = document.querySelector(`#edit-date-${id}`)?.value || editedTask.due_date;
       const due_time = document.querySelector(`#edit-time-${id}`)?.value || editedTask.due_time;
-
+  
       if (!due_date || !due_time) {
         toast.error("⚠️ Both date and time required");
         return;
       }
-
-      const due_datetime = convertISTtoUTC(due_date, due_time);
-
+  
+      const due_datetime = combineDateTime(due_date, due_time);
+  
       const payload = {
         task_name: editedTask.task_name,
         category: editedTask.category,
@@ -71,13 +79,19 @@ const SearchResult = () => {
         reminder: editedTask.reminder ? parseInt(editedTask.reminder) : null,
         due_datetime
       };
-
+  
       const response = await axios.put(`http://localhost:5123/tasks/${id}`, payload);
-
+  
       if (response.status === 200) {
-        setTasks(prev =>
-          prev.map(task =>
-            task._id === id ? { ...task, ...payload } : task
+        setTasks(prevTasks =>
+          prevTasks.map(task =>
+            task._id === id
+              ? {
+                  ...task,
+                  ...payload,
+                  due_time: format12HourTime(due_time) // 👈 display-friendly format
+                }
+              : task
           )
         );
         toast.success("✅ Task updated!");
@@ -90,6 +104,8 @@ const SearchResult = () => {
       toast.error("❌ Error saving task");
     }
   };
+  
+  
 
   const handleCancel = () => {
     setEditingTaskId(null);
@@ -208,7 +224,7 @@ const SearchResult = () => {
                       <td>{task.task_name}</td>
                       <td>{task.category}</td>
                       <td>{task.due_datetime?.split("T")[0]}</td>
-                      <td>{new Date(task.due_datetime).toTimeString().slice(0, 5)}</td>
+                      <td>{task.due_time}</td>
                       <td>{task.reminder}</td>
                       <td>
                         <input
@@ -230,44 +246,102 @@ const SearchResult = () => {
         </>
       )}
 
-      {completedTasks.length > 0 && (
-        <>
-          <h3 className="completed-header">Completed Tasks</h3>
-          <table className="search-table">
-            <thead>
-              <tr>
-                <th>Task Name</th>
-                <th>Category</th>
-                <th>Due Date</th>
-                <th>Time</th>
-                <th>Completed</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {completedTasks.map(task => (
-                <tr key={task._id} className="completed-task">
-                  <td>{task.task_name}</td>
-                  <td>{task.category}</td>
-                  <td>{task.due_datetime?.split("T")[0]}</td>
-                  <td>{new Date(task.due_datetime).toTimeString().slice(0, 5)}</td>
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={task.completed}
-                      onChange={() => handleCompletedChange(task._id, task.completed)}
-                    />
-                  </td>
-                  <td>
-                    <button onClick={() => handleEditClick(task)}>Edit</button>
-                    <button onClick={() => handleDelete(task._id)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )}
+{completedTasks.length > 0 && (
+  <>
+    <h3 className="completed-header">Completed Tasks</h3>
+    <table className="search-table">
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th>Category</th>
+          <th>Due Date</th>
+          <th>Time</th>
+          <th>Completed</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {completedTasks.map(task => (
+          <tr key={task._id} className="completed-task">
+            {editingTaskId === task._id ? (
+              <>
+                <td>
+                  <input
+                    type="text"
+                    value={editedTask.task_name}
+                    onChange={(e) => setEditedTask({ ...editedTask, task_name: e.target.value })}
+                  />
+                </td>
+                <td>
+                  <select
+                    value={editedTask.category}
+                    onChange={(e) => setEditedTask({ ...editedTask, category: e.target.value })}
+                  >
+                    <option value="Study">Study</option>
+                    <option value="Work/Projects">Work/Projects</option>
+                    <option value="Play">Play</option>
+                    <option value="Outing">Outing</option>
+                    <option value="Leisure">Leisure</option>
+                    <option value="Household">Household</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </td>
+                <td>
+                  <input
+                    id={`edit-date-${task._id}`}
+                    type="date"
+                    value={editedTask.due_date}
+                    onChange={(e) => setEditedTask({ ...editedTask, due_date: e.target.value })}
+                  />
+                </td>
+                <td>
+                  <input
+                    id={`edit-time-${task._id}`}
+                    type="time"
+                    value={editedTask.due_time}
+                    onChange={(e) => setEditedTask({ ...editedTask, due_time: e.target.value })}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={editedTask.completed}
+                    onChange={(e) => setEditedTask({ ...editedTask, completed: e.target.checked })}
+                  />
+                </td>
+                <td>
+                  <button onClick={() => handleSave(task._id)}>Save</button>
+                  <button onClick={handleCancel}>Cancel</button>
+                </td>
+              </>
+            ) : (
+              <>
+                <td>{task.task_name}</td>
+                <td>{task.category}</td>
+                <td>{task.due_datetime?.split("T")[0]}</td>
+                <td>{task.due_time}</td>
+
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => handleCompletedChange(task._id, task.completed)}
+                  />
+                </td>
+                <td>
+                  <button onClick={() => handleEditClick(task)}>Edit</button>
+                  <button onClick={() => handleDelete(task._id)}>Delete</button>
+                </td>
+              </>
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </>
+)}
+
 
       <button className="back-link" onClick={() => history.goBack()}>
         🔙 Back to Task List
