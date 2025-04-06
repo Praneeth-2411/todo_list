@@ -2,6 +2,24 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styles/addtask.css';
+const handleLogout = () => {
+  localStorage.removeItem('user_id');
+
+  // 🔥 If using sockets:
+  if (window.socket) {
+    window.socket.disconnect(); // or socket.off("reminder") if you only want to remove one listener
+  }
+
+  // 🔥 If using reminder timers (like setTimeout), clear them here:
+  if (window.reminderTimeout) {
+    clearTimeout(window.reminderTimeout);
+    window.reminderTimeout = null;
+  }
+
+  // Redirect to login
+  window.location.href = '/login';
+};
+
 
 const AddTask = ({ setTasks }) => {
   const [taskName, setTaskName] = useState('');
@@ -126,7 +144,8 @@ const AddTask = ({ setTasks }) => {
         <button className="add-task-button" type="submit">Add Task</button>
       </form>
 
-      <Link to="/login" className="logout-link">Logout</Link>
+      <button onClick={handleLogout} className="logout-link">Logout</button>
+
     </div>
   );
 };

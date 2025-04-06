@@ -144,6 +144,9 @@ app.put('/tasks/:id', async (req, res) => {
     }
 
     await task.save();
+    triggeredReminders.delete(task._id.toString());
+
+
     res.json(task);
   } catch (error) {
     console.error("❌ Error updating task:", error);
@@ -170,72 +173,95 @@ app.delete('/tasks/:id', async (req, res) => {
 
 // ------------------ Socket.io Reminder Logic ------------------ //
 
-// Initialize the set to track triggered task IDs
-const triggeredTaskIds = new Set();  // Ensure this is initialized at the top
+const triggeredReminders = new Map(); // taskId ➝ reminderTime
+const userSocketMap = new Map();      // userId ➝ socket
 
-// This will run every minute to check if any reminders should be triggered
+// 🔁 This runs every 60 seconds to auto-send reminders
 setInterval(async () => {
   const now = new Date();
-  // Fetch tasks that need a reminder and are not completed
   const tasks = await Task.find({ completed: false, reminder: { $ne: null } });
 
   tasks.forEach(task => {
-    // Calculate the reminder time based on the due time and reminder offset
     const reminderTime = new Date(task.due_datetime.getTime() - task.reminder * 60000);
-    const taskId = task._id.toString(); // Convert task ID to string for easier comparison
+    const taskId = task._id.toString();
+    const userId = task.user_id.toString();
+    const userSocket = userSocketMap.get(userId);
+    const lastTriggered = triggeredReminders.get(taskId);
 
-    // If the current time is in the reminder window and the task has not been triggered before
-    if (now >= reminderTime && now <= task.due_datetime && !triggeredTaskIds.has(taskId)) {
-      // Emit the reminder-toast event
-      io.emit('reminder-toast', {
+    // Only send if:
+    // - Time is in valid window
+    // - Reminder not sent for this version of task
+    // - User is online
+    if (
+      now >= reminderTime &&
+      now <= task.due_datetime &&
+      (!lastTriggered || lastTriggered.getTime() !== reminderTime.getTime()) &&
+      userSocket
+    ) {
+      userSocket.emit('reminder-toast', {
         task_name: task.task_name,
         due_datetime: task.due_datetime,
       });
 
-      // Add task to the set of triggered task IDs to avoid sending multiple reminders
-      triggeredTaskIds.add(taskId);
+      triggeredReminders.set(taskId, reminderTime);
       console.log(`✅ (Auto) Reminder sent for task: ${task.task_name}`);
     }
   });
 
-  // Clean up triggered task IDs that are no longer valid (either completed or past due)
-  for (const taskId of triggeredTaskIds) {
+  // Clean up stale triggers (task no longer exists or due time passed)
+  for (const [taskId, _] of triggeredReminders) {
     const task = tasks.find(t => t._id.toString() === taskId);
     if (!task || task.completed || new Date(task.due_datetime) < now) {
-      triggeredTaskIds.delete(taskId);
+      triggeredReminders.delete(taskId);
     }
   }
-}, 60000); // Runs every 60 seconds
+}, 60000);
 
-// Socket connection event
+// 🔌 Socket connection
 io.on('connection', (socket) => {
   console.log('🟢 User connected to socket');
 
-  // Trigger reminders when user connects (this is called after login)
+  // Map user to socket when they log in
   socket.on('trigger-reminders', async ({ user_id }) => {
+    const userIdStr = user_id.toString();
+    userSocketMap.set(userIdStr, socket);
+
     const now = new Date();
-    // Fetch tasks for the logged-in user that need reminders and are not completed
     const tasks = await Task.find({ user_id, completed: false, reminder: { $ne: null } });
 
     tasks.forEach(task => {
       const reminderTime = new Date(task.due_datetime.getTime() - task.reminder * 60000);
-      const taskId = task._id.toString(); // Convert task ID to string for easier comparison
+      const taskId = task._id.toString();
+      const lastTriggered = triggeredReminders.get(taskId);
 
-      // Check if the current time is within the reminder window
-      if (now >= reminderTime && now <= task.due_datetime && !triggeredTaskIds.has(taskId)) {
-        // Emit the reminder-toast event to the connected client
+      if (
+        now >= reminderTime &&
+        now <= task.due_datetime &&
+        (!lastTriggered || lastTriggered.getTime() !== reminderTime.getTime())
+      ) {
         socket.emit('reminder-toast', {
           task_name: task.task_name,
           due_datetime: task.due_datetime,
         });
 
-        // Mark this task as triggered to prevent multiple reminders
-        triggeredTaskIds.add(taskId);
+        triggeredReminders.set(taskId, reminderTime);
         console.log(`✅ (Login) Reminder sent for task: ${task.task_name}`);
       }
     });
   });
+
+  // Handle disconnects: cleanup socket mapping
+  socket.on('disconnect', () => {
+    for (const [userId, sock] of userSocketMap.entries()) {
+      if (sock === socket) {
+        userSocketMap.delete(userId);
+        console.log(`🔌 Disconnected: Removed socket for user ${userId}`);
+        break;
+      }
+    }
+  });
 });
+
 
 
 // ------------------- Auth ------------------- //

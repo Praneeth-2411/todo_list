@@ -79,8 +79,8 @@ const TaskList = ({ tasks, setTasks }) => {
     setEditingTaskId(task._id);
     const dueDate = new Date(task.due_datetime);
     const time = dueDate.toTimeString().slice(0, 5);
-    const date = dueDate.toISOString().split('T')[0];
-
+    const date = dueDate.toLocaleDateString('en-CA'); // 🔁 Fixed this line
+  
     setEditedTask(prev => ({
       ...prev,
       [task._id]: {
@@ -91,9 +91,10 @@ const TaskList = ({ tasks, setTasks }) => {
         reminder: task.reminder || '',
       }
     }));
-
+  
     console.log('[EDIT] Editing task:', task);
   };
+  
 
   const handleSave = async (taskId) => {
     const edited = editedTask[taskId];

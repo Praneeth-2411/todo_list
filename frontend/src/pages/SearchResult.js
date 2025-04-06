@@ -34,12 +34,12 @@ const SearchResult = () => {
   const handleEditClick = (task) => {
     setEditingTaskId(task._id);
   
-    const localDate = new Date(task.due_datetime); // already in local time (IST if your system is)
+    const localDate = new Date(task.due_datetime); // interpreted as local (IST)
   
     setEditedTask({
       task_name: task.task_name || '',
-      due_date: localDate.toISOString().split("T")[0], // yyyy-mm-dd
-      due_time: localDate.toTimeString().slice(0, 5),  // hh:mm (24-hour format)
+      due_date: localDate.toLocaleDateString('en-CA'), // ✅ Correct local date
+      due_time: localDate.toTimeString().slice(0, 5),  // hh:mm
       category: task.category || '',
       reminder: task.reminder?.toString() || '',
       completed: task.completed || false
@@ -223,7 +223,8 @@ const SearchResult = () => {
                     <>
                       <td>{task.task_name}</td>
                       <td>{task.category}</td>
-                      <td>{task.due_datetime?.split("T")[0]}</td>
+                      <td>{new Date(task.due_datetime).toLocaleDateString('en-CA')}</td>
+
                       <td>{task.due_time}</td>
                       <td>{task.reminder}</td>
                       <td>
@@ -319,7 +320,8 @@ const SearchResult = () => {
               <>
                 <td>{task.task_name}</td>
                 <td>{task.category}</td>
-                <td>{task.due_datetime?.split("T")[0]}</td>
+                <td>{new Date(task.due_datetime).toLocaleDateString('en-CA')}</td>
+
                 <td>{task.due_time}</td>
 
                 <td>
