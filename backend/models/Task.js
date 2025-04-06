@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 const TaskSchema = new mongoose.Schema({
-  task_name: { type: String, required: true },  // ✅ Fix: Rename from title → task_name
+  task_name: { type: String, required: true },  
   due_datetime: { type: Date, required: true }, 
   category: { type: String },
   completed: { type: Boolean, default: false },
+  reminder: { type: Number, default: null },  // ✅ Added reminder in minutes
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

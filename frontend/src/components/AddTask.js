@@ -8,6 +8,7 @@ const AddTask = ({ setTasks }) => {
   const [dueDate, setDueDate] = useState('');
   const [time, setTime] = useState('');
   const [category, setCategory] = useState('');
+  const [reminder, setReminder] = useState(''); // ✅ Added reminder state
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const categories = ["Study", "Work/Projects", "Play", "Outing", "Leisure", "Household", "Personal", "Others"];
@@ -31,17 +32,18 @@ const AddTask = ({ setTasks }) => {
       return;
     }
 
-    const due_datetime = new Date(`${dueDate}T${time}:00`);
-    if (isNaN(due_datetime.getTime())) {
-      alert("Invalid date-time format. Please enter a valid date and time.");
+    if (!reminder || isNaN(reminder) || reminder < 1) {
+      alert("Please enter a valid reminder time in minutes.");
       return;
     }
 
     try {
       const res = await axios.post('http://localhost:5123/tasks', {
         task_name: taskName,
-        due_datetime,
+        due_date: dueDate,   // ✅ Send date separately
+        due_time: time,      // ✅ Send time separately
         category,
+        reminder: parseInt(reminder),  // ✅ Sending reminder as an integer
         user_id: user_id.trim(),
       });
 
@@ -53,6 +55,7 @@ const AddTask = ({ setTasks }) => {
       setDueDate('');
       setTime('');
       setCategory('');
+      setReminder(''); // ✅ Reset reminder after adding task
       setDropdownOpen(false);
     } catch (error) {
       alert("Failed to add task. Please try again.");
@@ -85,6 +88,15 @@ const AddTask = ({ setTasks }) => {
           value={time}
           onChange={(e) => setTime(e.target.value)}
           required
+        />
+        <input
+          type="number"
+          className="add-task-input"
+          placeholder="Reminder (minutes before due)"
+          value={reminder}
+          onChange={(e) => setReminder(e.target.value)}
+          required
+          min="1"
         />
 
         {/* ✅ Fixed Category Dropdown */}

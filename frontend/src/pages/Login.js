@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom'; // ✅ useHistory instead of useNavigate
 import '../styles/login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useHistory(); // ✅ useHistory for navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:5123/login', { username, password });
-      const { user_id } = res.data; // Get user_id from response
+      const { user_id } = res.data;
       if (user_id) {
-        localStorage.setItem('user_id', String(user_id)); // Store user_id in localStorage
+        localStorage.setItem('user_id', String(user_id));
+        localStorage.setItem('justLoggedIn', 'true'); // ✅ for login-time reminder
         setIsLoggedIn(true);
+        history.push('/addtask'); // ✅ redirect in v5
       }
     } catch (error) {
       console.error('Error logging in:', error);
@@ -23,12 +26,9 @@ const Login = () => {
       setIsLoggedIn(false);
     }
   };
-  
-  
 
   return (
     <div className="login-container">
-      {/* Back button */}
       <Link to="/" className="login-back-button">← Back</Link>
 
       <div className="login-form">
