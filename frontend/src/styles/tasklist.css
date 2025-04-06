@@ -22,7 +22,7 @@
 }
 
 /* ✅ Task List Headings */
-.task-list-heading1, .task-list-heading2 {
+.task-list-container h2 {
   margin-top: 30px;
   font-size: 32px;
   margin-bottom: 10px;
@@ -30,8 +30,7 @@
   color: rgb(82, 76, 76);
 }
 
-.dark-mode .task-list-heading1, 
-.dark-mode .task-list-heading2 {
+.dark-mode .task-list-container h2 {
   color: #ffffff;
 }
 

@@ -344,7 +344,7 @@ const SearchResult = () => {
 
 
       <button className="back-link" onClick={() => history.goBack()}>
-        🔙 Back to Task List
+        Back
       </button>
     </div>
   );
