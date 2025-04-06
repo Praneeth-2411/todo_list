@@ -259,6 +259,37 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Error logging in user' });
   }
 });
+// ------------------- Signup ------------------- //
+app.post('/signup', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    console.log("🟢 Signup attempt:", username);
+
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password are required' });
+    }
+
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(409).json({ error: 'Username already exists' });
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10); // salt rounds = 10
+    const newUser = new User({
+      username,
+      password: hashedPassword
+    });
+
+    await newUser.save();
+
+    console.log("✅ Signup successful for:", newUser.username);
+    res.status(201).json({ message: 'Signup successful', user_id: newUser._id });
+  } catch (error) {
+    console.error("❌ Error during signup:", error);
+    res.status(500).json({ error: "Internal server error during signup" });
+  }
+});
+
 
 // ------------------- Server Start ------------------- //
 
