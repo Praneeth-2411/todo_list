@@ -10,7 +10,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5123/signup', { username, password });
+      await axios.post('https://done-dusted-qvhy.onrender.com/signup', { username, password });
       alert('User signed up successfully');
     } catch (error) {
       console.error('Error signing up:', error);

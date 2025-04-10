@@ -52,7 +52,7 @@ const AddTask = ({ setTasks }) => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5123/tasks', {
+      const res = await axios.post('https://done-dusted-qvhy.onrender.com/tasks', {
         task_name: taskName,
         due_date: dueDate,   
         due_time: time,     

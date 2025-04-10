@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { io } from 'socket.io-client';
 import '../styles/tasklist.css';
 
-const API_URL = "http://localhost:5123";
+const API_URL = "https://done-dusted-qvhy.onrender.com/";
 
 const TaskList = ({ tasks, setTasks }) => {
   const [editingTaskId, setEditingTaskId] = useState(null);

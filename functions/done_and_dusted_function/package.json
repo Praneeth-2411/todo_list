@@ -1,0 +1,9 @@
+{
+	"name": "done_and_dusted_function",
+	"version": "1.0.0",
+	"main": "app.js",
+	"author": "jeswintobias@gmail.com",
+	"dependencies": {
+		"zcatalyst-sdk-node": "latest"
+	}
+}

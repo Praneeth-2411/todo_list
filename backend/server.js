@@ -11,14 +11,17 @@ const User = require('./models/User');
 
 const app = express();
 const server = http.createServer(app);
+const origins=[
+  "http://localhost:3000/","https://legendary-macaron-d850a4.netlify.app/"
+]
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: origins,
     methods: ["GET", "POST", "PUT", "DELETE"]
   }
 });
 
-app.use(cors({ origin: "http://localhost:3000", methods: "GET,PUT,POST,DELETE" }));
+app.use(cors({  origin: origins, methods: "GET,PUT,POST,DELETE" }));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI, {})
@@ -320,7 +323,7 @@ app.post('/login', async (req, res) => {
 
 // ------------------- Server Start ------------------- //
 
-const port = process.env.PORT || 5123;
+const port = 5123;
 server.listen(port, () => {
   console.log(`🚀 Backend running on port ${port}`);
 });

@@ -48,7 +48,7 @@ const AppRoutes = () => {
     if (!user_id) return;
 
     try {
-      const res = await axios.get(`http://localhost:5123/tasks/${user_id}`);
+      const res = await axios.get(`https://done-dusted-qvhy.onrender.com/tasks/${user_id}`);
       setTasks(res.data);
 
       if (localStorage.getItem('justLoggedIn') === 'true') {
