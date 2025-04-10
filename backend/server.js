@@ -217,7 +217,7 @@ setInterval(async () => {
   }
 }, 60000);
 
-// 🔌 Socket connection
+// Socket connection
 io.on('connection', (socket) => {
   console.log('🟢 User connected to socket');
 
@@ -266,26 +266,6 @@ io.on('connection', (socket) => {
 
 // ------------------- Auth ------------------- //
 
-app.post('/login', async (req, res) => {
-  try {
-    console.log("🔑 Login attempt:", req.body.username);
-    const { username, password } = req.body;
-    if (!username || !password) return res.status(400).json({ error: 'Username and password are required' });
-
-    const user = await User.findOne({ username });
-    if (!user || !bcrypt.compareSync(password, user.password)) {
-      console.log("❌ Invalid login attempt");
-      return res.status(400).json({ error: 'Invalid username or password' });
-    }
-
-    console.log("✅ Login successful for:", user.username);
-    res.status(200).json({ message: 'Login successful', user_id: user._id });
-  } catch (error) {
-    console.error('❌ Error logging in user:', error);
-    res.status(500).json({ error: 'Error logging in user' });
-  }
-});
-// ------------------- Signup ------------------- //
 app.post('/signup', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -313,6 +293,27 @@ app.post('/signup', async (req, res) => {
   } catch (error) {
     console.error("❌ Error during signup:", error);
     res.status(500).json({ error: "Internal server error during signup" });
+  }
+});
+
+
+app.post('/login', async (req, res) => {
+  try {
+    console.log("🔑 Login attempt:", req.body.username);
+    const { username, password } = req.body;
+    if (!username || !password) return res.status(400).json({ error: 'Username and password are required' });
+
+    const user = await User.findOne({ username });
+    if (!user || !bcrypt.compareSync(password, user.password)) {
+      console.log("❌ Invalid login attempt");
+      return res.status(400).json({ error: 'Invalid username or password' });
+    }
+
+    console.log("✅ Login successful for:", user.username);
+    res.status(200).json({ message: 'Login successful', user_id: user._id });
+  } catch (error) {
+    console.error('❌ Error logging in user:', error);
+    res.status(500).json({ error: 'Error logging in user' });
   }
 });
 

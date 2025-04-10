@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom'; // ✅ useHistory instead of useNavigate
+import { Link, useHistory } from 'react-router-dom';
 import '../styles/login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const history = useHistory(); // ✅ useHistory for navigation
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,9 +16,8 @@ const Login = () => {
       const { user_id } = res.data;
       if (user_id) {
         localStorage.setItem('user_id', String(user_id));
-        localStorage.setItem('justLoggedIn', 'true'); // ✅ for login-time reminder
+        localStorage.setItem('justLoggedIn', 'true');
         setIsLoggedIn(true);
-        history.push('/addtask'); // ✅ redirect in v5
       }
     } catch (error) {
       console.error('Error logging in:', error);

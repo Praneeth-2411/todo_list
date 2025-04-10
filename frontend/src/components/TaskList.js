@@ -79,7 +79,7 @@ const TaskList = ({ tasks, setTasks }) => {
     setEditingTaskId(task._id);
     const dueDate = new Date(task.due_datetime);
     const time = dueDate.toTimeString().slice(0, 5);
-    const date = dueDate.toLocaleDateString('en-CA'); // 🔁 Fixed this line
+    const date = dueDate.toLocaleDateString('en-CA');
   
     setEditedTask(prev => ({
       ...prev,
@@ -203,7 +203,6 @@ const TaskList = ({ tasks, setTasks }) => {
             </select>
           </td>
   
-          {/* 🧠 Show reminder input ONLY if task is NOT completed */}
           {!isCompletedSection && (
             <td>
               <input
@@ -233,8 +232,7 @@ const TaskList = ({ tasks, setTasks }) => {
           <td>{new Date(task.due_datetime).toLocaleDateString()}</td>
           <td>{new Date(task.due_datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}</td>
           <td>{task.category}</td>
-  
-          {/* 👀 Show reminder column ONLY for pending tasks */}
+
           {!isCompletedSection && (
             <td>{task.reminder ? `${task.reminder} minutes before` : "No Reminder"}</td>
           )}

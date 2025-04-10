@@ -20,7 +20,6 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      {/* Back button */}
       <Link to="/" className="signup-back-button">← Back</Link>
 
       <div className="signup-form">

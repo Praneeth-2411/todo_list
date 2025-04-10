@@ -6,7 +6,6 @@ const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Load the saved dark mode preference from localStorage
     const savedMode = localStorage.getItem('darkMode') === 'true';
     setDarkMode(savedMode);
     if (savedMode) {
@@ -23,7 +22,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* 🔘 Dark Mode Toggle Button (Top Left) */}
       <button className="dark-mode-toggle" onClick={toggleDarkMode}>
         {darkMode ? 'Light Mode' : 'Dark Mode'}
       </button>

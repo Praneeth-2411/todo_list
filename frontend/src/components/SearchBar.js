@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/search.css';
 
+
 const SearchBar = () => {
   const [term, setTerm] = useState('');
 

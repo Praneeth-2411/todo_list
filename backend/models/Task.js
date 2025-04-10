@@ -5,7 +5,7 @@ const TaskSchema = new mongoose.Schema({
   due_datetime: { type: Date, required: true }, 
   category: { type: String },
   completed: { type: Boolean, default: false },
-  reminder: { type: Number, default: null },  // ✅ Added reminder in minutes
+  reminder: { type: Number, default: null },
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

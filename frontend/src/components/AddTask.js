@@ -5,18 +5,14 @@ import '../styles/addtask.css';
 const handleLogout = () => {
   localStorage.removeItem('user_id');
 
-  // 🔥 If using sockets:
   if (window.socket) {
-    window.socket.disconnect(); // or socket.off("reminder") if you only want to remove one listener
+    window.socket.disconnect();
   }
-
-  // 🔥 If using reminder timers (like setTimeout), clear them here:
   if (window.reminderTimeout) {
     clearTimeout(window.reminderTimeout);
     window.reminderTimeout = null;
   }
 
-  // Redirect to login
   window.location.href = '/login';
 };
 
@@ -26,7 +22,7 @@ const AddTask = ({ setTasks }) => {
   const [dueDate, setDueDate] = useState('');
   const [time, setTime] = useState('');
   const [category, setCategory] = useState('');
-  const [reminder, setReminder] = useState(''); // ✅ Added reminder state
+  const [reminder, setReminder] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const categories = ["Study", "Work/Projects", "Play", "Outing", "Leisure", "Household", "Personal", "Others"];
@@ -58,10 +54,10 @@ const AddTask = ({ setTasks }) => {
     try {
       const res = await axios.post('http://localhost:5123/tasks', {
         task_name: taskName,
-        due_date: dueDate,   // ✅ Send date separately
-        due_time: time,      // ✅ Send time separately
+        due_date: dueDate,   
+        due_time: time,     
         category,
-        reminder: parseInt(reminder),  // ✅ Sending reminder as an integer
+        reminder: parseInt(reminder), 
         user_id: user_id.trim(),
       });
 
@@ -73,7 +69,7 @@ const AddTask = ({ setTasks }) => {
       setDueDate('');
       setTime('');
       setCategory('');
-      setReminder(''); // ✅ Reset reminder after adding task
+      setReminder(''); 
       setDropdownOpen(false);
     } catch (error) {
       alert("Failed to add task. Please try again.");
@@ -117,7 +113,6 @@ const AddTask = ({ setTasks }) => {
           min="1"
         />
 
-        {/* ✅ Fixed Category Dropdown */}
         <div 
           className={`category-container ${dropdownOpen ? "active" : ""}`} 
           onClick={() => setDropdownOpen(!dropdownOpen)}

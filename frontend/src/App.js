@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
@@ -10,7 +9,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import socket from './socket'; // ✅ shared socket
+import socket from './socket';
 
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
@@ -73,7 +72,7 @@ const AppRoutes = () => {
 
   useEffect(() => {
     const reminderHandler = ({ task_name, due_datetime }) => {
-      console.log("🔥 Auto Reminder received:", task_name);
+      console.log("Auto Reminder received:", task_name);
 
       const formattedTime = new Date(due_datetime).toLocaleTimeString([], {
         hour: '2-digit',
@@ -83,7 +82,6 @@ const AppRoutes = () => {
       showToast(`⏰ Reminder: "${task_name}" is due at ${formattedTime}`);
     };
 
-    // ✅ Always clear and reattach to avoid duplicate listeners
     socket.off('reminder-toast');
     socket.on('reminder-toast', reminderHandler);
 
@@ -102,9 +100,6 @@ const AppRoutes = () => {
   return (
     <>
       <ToastContainer />
-
-      
-
       <Switch>
         <Route path="/" exact>
           <Home toggleDarkMode={toggleDarkMode} darkMode={darkMode} />

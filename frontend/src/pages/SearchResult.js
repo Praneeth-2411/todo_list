@@ -1,5 +1,3 @@
-// SearchResult.js
-
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -34,12 +32,12 @@ const SearchResult = () => {
   const handleEditClick = (task) => {
     setEditingTaskId(task._id);
   
-    const localDate = new Date(task.due_datetime); // interpreted as local (IST)
+    const localDate = new Date(task.due_datetime);
   
     setEditedTask({
       task_name: task.task_name || '',
-      due_date: localDate.toLocaleDateString('en-CA'), // ✅ Correct local date
-      due_time: localDate.toTimeString().slice(0, 5),  // hh:mm
+      due_date: localDate.toLocaleDateString('en-CA'), 
+      due_time: localDate.toTimeString().slice(0, 5),
       category: task.category || '',
       reminder: task.reminder?.toString() || '',
       completed: task.completed || false
@@ -51,7 +49,7 @@ const SearchResult = () => {
     const [year, month, day] = dateStr.split("-").map(Number);
     const [hour, minute] = timeStr.split(":").map(Number);
     const localDate = new Date(year, month - 1, day, hour, minute);
-    return localDate.toISOString(); // Let backend handle the shift
+    return localDate.toISOString();
   };
   const format12HourTime = (timeStr) => {
     const [hour, minute] = timeStr.split(":").map(Number);
@@ -89,7 +87,7 @@ const SearchResult = () => {
               ? {
                   ...task,
                   ...payload,
-                  due_time: format12HourTime(due_time) // 👈 display-friendly format
+                  due_time: format12HourTime(due_time)
                 }
               : task
           )
