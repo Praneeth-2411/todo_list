@@ -12,7 +12,7 @@ const User = require('./models/User');
 const app = express();
 const server = http.createServer(app);
 const origins=[
-  "http://localhost:3000/","https://legendary-macaron-d850a4.netlify.app/"
+  "http://localhost:3000/","https://doneandanddusted.onrender.com"
 ]
 const io = new Server(server, {
   cors: {
