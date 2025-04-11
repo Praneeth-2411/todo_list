@@ -23,7 +23,7 @@ const SearchResult = () => {
   useEffect(() => {
     if (searchTerm && user_id) {
       axios
-        .get(`https://done-dusted-qvhy.onrender.com/search/${user_id}/${encodeURIComponent(searchTerm)}`)
+        .get(`https://todolist-ioly.onrender.com/search/${user_id}/${encodeURIComponent(searchTerm)}`)
         .then((res) => setTasks(res.data))
         .catch((err) => console.error('❌ Error fetching search results:', err));
     }
@@ -78,7 +78,7 @@ const SearchResult = () => {
         due_datetime
       };
   
-      const response = await axios.put(`https://done-dusted-qvhy.onrender.com/tasks/${id}`, payload);
+      const response = await axios.put(`https://todolist-ioly.onrender.com/tasks/${id}`, payload);
   
       if (response.status === 200) {
         setTasks(prevTasks =>
@@ -111,7 +111,7 @@ const SearchResult = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://done-dusted-qvhy.onrender.com/tasks/${id}`);
+      await axios.delete(`https://todolist-ioly.onrender.com/tasks/${id}`);
       setTasks(prev => prev.filter(task => task._id !== id));
       toast.success("🗑️ Task deleted");
     } catch (err) {
@@ -123,7 +123,7 @@ const SearchResult = () => {
   const handleCompletedChange = async (id, currentStatus) => {
     try {
       const updated = !currentStatus;
-      await axios.put(`https://done-dusted-qvhy.onrender.com/tasks/${id}`, { completed: updated });
+      await axios.put(`https://todolist-ioly.onrender.com/tasks/${id}`, { completed: updated });
       setTasks(prev =>
         prev.map(task => task._id === id ? { ...task, completed: updated } : task)
       );

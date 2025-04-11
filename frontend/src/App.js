@@ -48,7 +48,7 @@ const AppRoutes = () => {
     if (!user_id) return;
 
     try {
-      const res = await axios.get(`https://done-dusted-qvhy.onrender.com/tasks/${user_id}`);
+      const res = await axios.get(`https://todolist-ioly.onrender.com/tasks/${user_id}`);
       setTasks(res.data);
 
       if (localStorage.getItem('justLoggedIn') === 'true') {
