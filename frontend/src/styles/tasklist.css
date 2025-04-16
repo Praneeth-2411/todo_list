@@ -1,4 +1,4 @@
-/* ✅ Task List Container */
+
 .task-list-container {
   display: flex;
   flex-direction: column;
@@ -18,10 +18,9 @@
 }
 
 .dark-mode .task-list-container {
-  background-image: url('/public/A_T_D.jpg'); /* Dark mode background */
+  background-image: url('/public/A_T_D.jpg'); 
 }
 
-/* ✅ Task List Headings */
 .task-list-container h2 {
   margin-top: 30px;
   font-size: 32px;
@@ -34,7 +33,6 @@
   color: #ffffff;
 }
 
-/* ✅ Task Table */
 .task-table {
   width: 80%;
   max-width: 800px;
@@ -59,7 +57,6 @@
   background-color: #000000;
 }
 
-/* ✅ Pending & Completed Task Styling */
 .pending-task td {
   background-color: #f6dbb2;
   border: 2px solid white;
@@ -92,7 +89,6 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* ✅ Delete Button */
 button.delete {
   background-color: #d17575;
   color: white;
@@ -116,8 +112,7 @@ button.delete:hover {
   background-color: #a83232;
 }
 
-/* ✅ Checkbox Not Allowed */
 .checkbox-not-allowed {
-  cursor: not-allowed; /* 🚫 Cursor change */
+  cursor: not-allowed; 
 }
 

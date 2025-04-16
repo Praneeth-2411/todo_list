@@ -1,9 +1,7 @@
-/* ✅ Prevent Horizontal Scroll */
 body {
   overflow-x: hidden;
 }
 
-/* ✅ Add Task Container */
 .add-task-container {
   display: flex;
   flex-direction: column;
@@ -23,15 +21,14 @@ body {
 }
 
 .dark-mode .add-task-container {
-  background-image: url('/public/A_T_D.jpg'); /* Dark mode background */
+  background-image: url('/public/A_T_D.jpg'); 
 }
 
-/* ✅ Hover Effect */
 .add-task-container:hover {
   transition: filter 0.5s ease-in-out;
 }
 
-/* ✅ Heading Styling */
+
 .add-task-container h2 {
   font-size: 2rem;
   color: rgb(82, 76, 76);
@@ -42,7 +39,6 @@ body {
   color: #ffffff;
 }
 
-/* ✅ Task Form */
 .add-task-form {
   background-color: #ebe9e9;
   padding: 15px;
@@ -63,7 +59,6 @@ body {
   transform: scale(1.03);
 }
 
-/* ✅ Input Field */
 .add-task-input {
   width: 100%;
   padding: 12px;
@@ -83,7 +78,6 @@ body {
   border: 1px solid #d897ff;
 }
 
-/* ✅ Category Dropdown */
 .category-container {
   position: relative;
   width: 100%;
@@ -92,7 +86,6 @@ body {
   cursor: pointer;
 }
 
-/* ✅ Category Box (Selected Category Display) */
 .category-box {
   width: 94%;
   padding: 12px;
@@ -112,7 +105,6 @@ body {
   border: 1px solid #d897ff;
 }
 
-/* ✅ Category Options */
 .category-options {
   display: none;
   position: absolute;
@@ -130,12 +122,10 @@ body {
   border: 1px solid #d897ff;
 }
 
-/* ✅ Show Dropdown When Active */
 .category-container.active .category-options {
   display: block;
 }
 
-/* ✅ Individual Category Option */
 .category-option {
   padding: 10px;
   cursor: pointer;
@@ -152,7 +142,6 @@ body {
   background-color: #363436;
 }
 
-/* ✅ Add Task Button */
 .add-task-button {
   background-color: #e3c265;
   color: rgb(0, 0, 0);
@@ -178,7 +167,6 @@ body {
   background-color: #5a2458;
 }
 
-/* ✅ Logout Button */
 .logout-link {
   display: inline-block;
   margin-top: 20px;
@@ -206,7 +194,6 @@ body {
   background-color: #84397e;
 }
 
-/* ✅ Save and Cancel Buttons */
 button {
   margin-right: 10px;
   padding: 8px 15px;
@@ -234,7 +221,6 @@ button:active {
   transform: scale(0.98);
 }
 
-/* ✅ Task Table Fix */
 .task-table td:last-child {
   text-align: center;
   white-space: nowrap;

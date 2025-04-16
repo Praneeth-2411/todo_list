@@ -139,7 +139,6 @@ app.put('/tasks/:id', async (req, res) => {
     if (reminder !== undefined) task.reminder = reminder;
     if (completed !== undefined) task.completed = completed;
 
-    // Smart update: prefer due_datetime, else build it from date + time
     if (due_datetime) {
       task.due_datetime = new Date(due_datetime);
     } else if (date && time) {
@@ -176,10 +175,10 @@ app.delete('/tasks/:id', async (req, res) => {
 
 // ------------------ Socket.io Reminder Logic ------------------ //
 
-const triggeredReminders = new Map(); // taskId ➝ reminderTime
-const userSocketMap = new Map();      // userId ➝ socket
+const triggeredReminders = new Map(); 
+const userSocketMap = new Map();      
 
-// 🔁 This runs every 60 seconds to auto-send reminders
+
 setInterval(async () => {
   const now = new Date();
   const tasks = await Task.find({ completed: false, reminder: { $ne: null } });
@@ -191,10 +190,6 @@ setInterval(async () => {
     const userSocket = userSocketMap.get(userId);
     const lastTriggered = triggeredReminders.get(taskId);
 
-    // Only send if:
-    // - Time is in valid window
-    // - Reminder not sent for this version of task
-    // - User is online
     if (
       now >= reminderTime &&
       now <= task.due_datetime &&
@@ -211,7 +206,6 @@ setInterval(async () => {
     }
   });
 
-  // Clean up stale triggers (task no longer exists or due time passed)
   for (const [taskId, _] of triggeredReminders) {
     const task = tasks.find(t => t._id.toString() === taskId);
     if (!task || task.completed || new Date(task.due_datetime) < now) {
@@ -220,11 +214,9 @@ setInterval(async () => {
   }
 }, 60000);
 
-// Socket connection
 io.on('connection', (socket) => {
   console.log('🟢 User connected to socket');
 
-  // Map user to socket when they log in
   socket.on('trigger-reminders', async ({ user_id }) => {
     const userIdStr = user_id.toString();
     userSocketMap.set(userIdStr, socket);
@@ -253,7 +245,6 @@ io.on('connection', (socket) => {
     });
   });
 
-  // Handle disconnects: cleanup socket mapping
   socket.on('disconnect', () => {
     for (const [userId, sock] of userSocketMap.entries()) {
       if (sock === socket) {
@@ -283,7 +274,7 @@ app.post('/signup', async (req, res) => {
       return res.status(409).json({ error: 'Username already exists' });
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 10); // salt rounds = 10
+    const hashedPassword = bcrypt.hashSync(password, 10); 
     const newUser = new User({
       username,
       password: hashedPassword
