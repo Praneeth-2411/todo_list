@@ -1,4 +1,4 @@
-# ✅ Done and Dusted - To-Do List App
+# Done and Dusted - To-Do List App
 
 A full-stack To-Do List web application built using the **MERN** stack (MongoDB, Express.js, React, Node.js). It offers real-time reminders, dark mode, task search, toast notifications, and a user-friendly interface — all designed to help users manage tasks efficiently.
 
@@ -37,38 +37,4 @@ A full-stack To-Do List web application built using the **MERN** stack (MongoDB,
 
 ---
 
-## 📁 Folder Structure
-
-```text
-client/
-├── components/
-│   ├── AddTask.jsx
-│   ├── TaskList.jsx
-│   └── SearchBar.jsx
-├── pages/
-│   ├── Home.jsx
-│   ├── Login.jsx
-│   ├── Signup.jsx
-│   └── SearchResult.jsx
-├── styles/
-│   ├── home.css
-│   ├── login.css
-│   ├── signup.css
-│   └── search.css
-├── App.jsx
-├── socket.js
-└── index.js
-
-server/
-├── models/
-│   └── Task.js
-├── routes/
-│   ├── authRoutes.js
-│   └── taskRoutes.js
-├── controllers/
-│   └── taskController.js
-├── socket/
-│   └── reminders.js
-├── .env
-└── index.js
 
